@@ -9,6 +9,8 @@ import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
 import { menus } from "../../../config/menu";
 import "./index.css";
+import { RootState } from "@/stores";
+import { useSelector } from "react-redux";
 
 /**
  * 搜索条
@@ -54,6 +56,7 @@ interface Props {
 export default function BasicLayout({ children }: Props) {
   const pathname = usePathname();
 
+  const loginUser = useSelector((state: RootState) => state.loginUser);
   return (
     <div
       id="basicLayout"
@@ -77,9 +80,9 @@ export default function BasicLayout({ children }: Props) {
           pathname,
         }}
         avatarProps={{
-          src: "https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg",
+          src: loginUser.userAvatar || "/assets/logo.png",
           size: "small",
-          title: "Cool",
+          title: loginUser.userName || "没有账号",
           render: (props, dom) => {
             return (
               <Dropdown
