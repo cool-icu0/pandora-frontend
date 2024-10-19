@@ -1,18 +1,12 @@
 "use client";
-// import type { Metadata } from "next";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
 import React, { useCallback, useEffect } from "react";
 import BasicLayout from "@/layouts/BasicLayout";
 import { Provider, useDispatch } from "react-redux";
 import { getLoginUserUsingGet } from "@/api/userController";
-import { setLoginUser } from "@/stores/loginUser";
 import store, { AppDispatch } from "@/stores";
-
-// export const metadata: Metadata = {
-//   title: "编程潘多拉",
-//   description: "Code by Cool",
-// };
+import AccessLayout from "@/access/AccessLayout";
 
 /**
  * 初始化布局（多封装一层，使得能调用 useDispatch）
@@ -31,22 +25,27 @@ const InitLayout: React.FC<
     // 获取用户信息
     const res = await getLoginUserUsingGet();
     if (res.data) {
-      dispatch(setLoginUser(res.data));
+      //更新全局用户状态
+      // dispatch(setLoginUser(res.data));
     } else {
       // todo 测试代码，实际可删除
-      setTimeout(() => {
-        const testUser = { userName: "测试登录", id: 1 };
-        dispatch(setLoginUser(testUser));
-      }, 3000);
+      // setTimeout(() => {
+      //   const testUser = {
+      //     userName: "测试登录",
+      //     id: 1,
+      //     userAvatar: "https:www.code-nav.cn/logo.png",
+      //     userRole: AccessEnum.ADMIN,
+      //   };
+      //   dispatch(setLoginUser(testUser));
+      // }, 3000);
     }
-
   }, []);
 
   useEffect(() => {
     doInitLoginUser();
   }, []);
 
-  return <>{children}</>;
+  return children;
 };
 
 export default function RootLayout({
@@ -60,7 +59,9 @@ export default function RootLayout({
         <AntdRegistry>
           <Provider store={store}>
             <InitLayout>
-              <BasicLayout>{children}</BasicLayout>
+              <BasicLayout>
+                <AccessLayout>{children}</AccessLayout>
+              </BasicLayout>
             </InitLayout>
           </Provider>
         </AntdRegistry>
