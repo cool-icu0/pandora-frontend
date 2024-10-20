@@ -34,16 +34,6 @@ export const menus = [
             },
         ],
     },
-    {
-        path:"/user",
-        name:"用户",
-        children:[
-            {
-                path:"/user/login",
-                name:"用户登录",
-            },
-        ]
-    }
 ] as MenuDataItem[];
 
 // 根据路径查找所有菜单

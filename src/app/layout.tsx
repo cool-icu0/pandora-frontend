@@ -7,8 +7,8 @@ import { Provider, useDispatch } from "react-redux";
 import { getLoginUserUsingGet } from "@/api/userController";
 import store, { AppDispatch } from "@/stores";
 import AccessLayout from "@/access/AccessLayout";
-import AccessEnum from "@/access/accessEnum";
-import {setLoginUser} from "@/stores/loginUser";
+import { setLoginUser } from "@/stores/loginUser";
+import { usePathname, useRouter } from "next/navigation";
 
 /**
  * 初始化布局（多封装一层，使得能调用 useDispatch）
@@ -28,18 +28,8 @@ const InitLayout: React.FC<
     const res = await getLoginUserUsingGet();
     if (res.data) {
       //更新全局用户状态
-      // dispatch(setLoginUser(res.data));
-    } else {
-      // todo 测试代码，实际可删除
-      // setTimeout(() => {
-      //   const testUser = {
-      //     userName: "测试登录",
-      //     id: 1,
-      //     userAvatar: "https:www.code-nav.cn/logo.png",
-      //     userRole: AccessEnum.ADMIN,
-      //   };
-      //   dispatch(setLoginUser(testUser));
-      // }, 3000);
+      // @ts-ignore
+      dispatch(setLoginUser(res.data));
     }
   }, []);
 
@@ -55,15 +45,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  // 定义一个函数来判断是否是登录或注册页面
+  const isLoginOrRegisterPage = () => {
+    // 这里需要根据你的实际路由配置来调整
+    const loginPath = "/user/login";
+    const registerPath = "/user/register";
+    return pathname === loginPath || pathname === registerPath;
+  };
   return (
     <html lang="en">
       <body>
         <AntdRegistry>
           <Provider store={store}>
             <InitLayout>
-              <BasicLayout>
-                <AccessLayout>{children}</AccessLayout>
-              </BasicLayout>
+              {isLoginOrRegisterPage() ? (
+                <>{children}</>
+              ) : (
+                <BasicLayout>
+                  <AccessLayout>{children}</AccessLayout>
+                </BasicLayout>
+              )}
             </InitLayout>
           </Provider>
         </AntdRegistry>
