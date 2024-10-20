@@ -7,6 +7,8 @@ import { Provider, useDispatch } from "react-redux";
 import { getLoginUserUsingGet } from "@/api/userController";
 import store, { AppDispatch } from "@/stores";
 import AccessLayout from "@/access/AccessLayout";
+import AccessEnum from "@/access/accessEnum";
+import {setLoginUser} from "@/stores/loginUser";
 
 /**
  * 初始化布局（多封装一层，使得能调用 useDispatch）
