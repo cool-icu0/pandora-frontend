@@ -10,12 +10,13 @@ export default function GlobalFooter() {
 
     return (
         <div className="global-footer">
-            <div>© {currentYear} 编程潘多拉</div>
-            <div>
+            <span>© {currentYear} 编程潘多拉</span>
+            <br/>
+            <span>
                 <a href="https://www.yuque.com/icu0" target="_blank">
                     作者：Cool
                 </a>
-            </div>
+            </span>
         </div>
     );
 }

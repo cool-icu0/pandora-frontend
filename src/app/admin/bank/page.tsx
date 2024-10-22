@@ -8,9 +8,9 @@ import type { ActionType, ProColumns } from "@ant-design/pro-components";
 import { PageContainer, ProTable } from "@ant-design/pro-components";
 import { Button, message, Space, Typography } from "antd";
 import React, { useRef, useState } from "react";
+import CreateModal from "@/app/admin/bank/components/CreateModal";
+import UpdateModal from "@/app/admin/bank/components/UpdateModal";
 import './index.css';
-import CreateModal from "@/app/admin/components/CreateModal";
-import UpdateModal from "@/app/admin/components/UpdateModal";
 
 /**
  * 题库管理页面

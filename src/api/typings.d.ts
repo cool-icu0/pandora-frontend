@@ -42,6 +42,8 @@ declare namespace API {
   };
 
   type BaseResponsePageQuestionBank_ = {
+    total(total: any): number | undefined;
+    records: never[];
     code?: number;
     data?: PageQuestionBank_;
     message?: string;

@@ -8,8 +8,8 @@ import {
   deleteUserUsingPost,
   listUserByPageUsingPost,
 } from "@/api/userController";
-import CreateModal from "@/app/admin/components/CreateModal";
-import UpdateModal from "@/app/admin/components/UpdateModal";
+import CreateModal from "@/app/admin/user/components/CreateModal";
+import UpdateModal from "@/app/admin/user/components/UpdateModal";
 
 /**
  * 会员管理页面

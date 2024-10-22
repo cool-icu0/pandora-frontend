@@ -1,7 +1,7 @@
 "use client";
-import { LogoutOutlined, SearchOutlined } from "@ant-design/icons";
+import { LogoutOutlined } from "@ant-design/icons";
 import { ProLayout } from "@ant-design/pro-components";
-import { Dropdown, Input, message } from "antd";
+import { Dropdown, message } from "antd";
 import React from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -15,38 +15,7 @@ import getAccessibleMenus from "@/access/menuAccess";
 import { userLogoutUsingPost } from "@/api/userController";
 import { setLoginUser } from "@/stores/loginUser";
 import { DEFAULT_USER } from "@/contants/user";
-
-/**
- * 搜索条
- * @constructor
- */
-const SearchInput = () => {
-  return (
-    <div
-      key="SearchOutlined"
-      aria-hidden
-      style={{
-        display: "flex",
-        alignItems: "center",
-        marginInlineEnd: 24,
-      }}
-      onMouseDown={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-      }}
-    >
-      <Input
-        style={{
-          borderRadius: 4,
-          marginInlineEnd: 12,
-        }}
-        prefix={<SearchOutlined />}
-        placeholder="搜索题目"
-        variant="borderless"
-      />
-    </div>
-  );
-};
+import SearchInput from "@/layouts/BasicLayout/components/SearchInput";
 
 interface Props {
   children: React.ReactNode;
@@ -59,6 +28,7 @@ interface Props {
  */
 export default function BasicLayout({ children }: Props) {
   const pathname = usePathname();
+  //当前登录用户
   const loginUser = useSelector((state: RootState) => state.loginUser);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -73,7 +43,6 @@ export default function BasicLayout({ children }: Props) {
       dispatch(setLoginUser(DEFAULT_USER));
       router.push("/");
     } catch (e) {
-      // @ts-ignore
       message.error("操作失败，" + e.message);
     }
   };
@@ -104,7 +73,18 @@ export default function BasicLayout({ children }: Props) {
           size: "small",
           title: loginUser.userName || "没有账号",
           render: (props, dom) => {
-            return loginUser.id ? (
+            if (!loginUser.id) {
+              return (
+                <div
+                  onClick={() => {
+                    router.push("/user/login");
+                  }}
+                >
+                  {dom}
+                </div>
+              );
+            }
+            return (
               <Dropdown
                 menu={{
                   items: [
@@ -116,7 +96,6 @@ export default function BasicLayout({ children }: Props) {
                   ],
                   onClick: async (event: { key: React.Key }) => {
                     const { key } = event;
-                    // 退出登录
                     if (key === "logout") {
                       userLogout();
                     }
@@ -125,14 +104,6 @@ export default function BasicLayout({ children }: Props) {
               >
                 {dom}
               </Dropdown>
-            ) : (
-              <div
-                onClick={() => {
-                  router.push("/user/login");
-                }}
-              >
-                {dom}
-              </div>
             );
           },
         }}
