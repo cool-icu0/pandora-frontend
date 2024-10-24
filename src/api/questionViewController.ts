@@ -5,7 +5,7 @@ import request from "@/libs/request";
 /** addQuestionView POST /api/questionView/add */
 export async function addQuestionViewUsingPost(
   body: API.QuestionViewAddRequest,
-  options?: { [key: string]: any },
+  options?: { [key: string]: any }
 ) {
   return request<API.BaseResponseLong_>("/api/questionView/add", {
     method: "POST",
@@ -20,7 +20,7 @@ export async function addQuestionViewUsingPost(
 /** deleteQuestionView POST /api/questionView/delete */
 export async function deleteQuestionViewUsingPost(
   body: API.DeleteRequest,
-  options?: { [key: string]: any },
+  options?: { [key: string]: any }
 ) {
   return request<API.BaseResponseBoolean_>("/api/questionView/delete", {
     method: "POST",
@@ -36,7 +36,7 @@ export async function deleteQuestionViewUsingPost(
 export async function getQuestionViewVoByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getQuestionViewVOByIdUsingGETParams,
-  options?: { [key: string]: any },
+  options?: { [key: string]: any }
 ) {
   return request<API.BaseResponseQuestionViewVO_>("/api/questionView/get/vo", {
     method: "GET",
@@ -50,7 +50,7 @@ export async function getQuestionViewVoByIdUsingGet(
 /** listQuestionViewByPage POST /api/questionView/list/page */
 export async function listQuestionViewByPageUsingPost(
   body: API.QuestionViewQueryRequest,
-  options?: { [key: string]: any },
+  options?: { [key: string]: any }
 ) {
   return request<API.BaseResponsePageQuestionView_>(
     "/api/questionView/list/page",
@@ -61,14 +61,14 @@ export async function listQuestionViewByPageUsingPost(
       },
       data: body,
       ...(options || {}),
-    },
+    }
   );
 }
 
 /** listQuestionViewVOByPage POST /api/questionView/list/page/vo */
 export async function listQuestionViewVoByPageUsingPost(
   body: API.QuestionViewQueryRequest,
-  options?: { [key: string]: any },
+  options?: { [key: string]: any }
 ) {
   return request<API.BaseResponsePageQuestionViewVO_>(
     "/api/questionView/list/page/vo",
@@ -79,14 +79,14 @@ export async function listQuestionViewVoByPageUsingPost(
       },
       data: body,
       ...(options || {}),
-    },
+    }
   );
 }
 
 /** listMyQuestionViewVOByPage POST /api/questionView/my/list/page/vo */
 export async function listMyQuestionViewVoByPageUsingPost(
   body: API.QuestionViewQueryRequest,
-  options?: { [key: string]: any },
+  options?: { [key: string]: any }
 ) {
   return request<API.BaseResponsePageQuestionViewVO_>(
     "/api/questionView/my/list/page/vo",
@@ -97,14 +97,14 @@ export async function listMyQuestionViewVoByPageUsingPost(
       },
       data: body,
       ...(options || {}),
-    },
+    }
   );
 }
 
 /** updateQuestionView POST /api/questionView/update */
 export async function updateQuestionViewUsingPost(
   body: API.QuestionViewUpdateRequest,
-  options?: { [key: string]: any },
+  options?: { [key: string]: any }
 ) {
   return request<API.BaseResponseBoolean_>("/api/questionView/update", {
     method: "POST",

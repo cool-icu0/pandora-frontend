@@ -1,5 +1,5 @@
 "use client";
-import { LogoutOutlined } from "@ant-design/icons";
+import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import { ProLayout } from "@ant-design/pro-components";
 import { Dropdown, message } from "antd";
 import React from "react";
@@ -85,25 +85,33 @@ export default function BasicLayout({ children }: Props) {
               );
             }
             return (
-              <Dropdown
-                menu={{
-                  items: [
-                    {
-                      key: "logout",
-                      icon: <LogoutOutlined />,
-                      label: "退出登录",
-                    },
-                  ],
-                  onClick: async (event: { key: React.Key }) => {
-                    const { key } = event;
-                    if (key === "logout") {
-                      userLogout();
-                    }
-                  },
-                }}
-              >
-                {dom}
-              </Dropdown>
+                <Dropdown
+                    menu={{
+                      items: [
+                        {
+                          key: "userCenter",
+                          icon: <UserOutlined />,
+                          label: "个人中心",
+                        },
+                        {
+                          key: "logout",
+                          icon: <LogoutOutlined />,
+                          label: "退出登录",
+                        },
+                      ],
+                      onClick: async (event: { key: React.Key }) => {
+                        const { key } = event;
+                        if (key === "logout") {
+                          userLogout();
+                        } else if (key === "userCenter") {
+                          router.push("/user/center");
+                        }
+                      },
+                    }}
+                >
+                  {dom}
+                </Dropdown>
+
             );
           },
         }}

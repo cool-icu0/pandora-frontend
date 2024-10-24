@@ -21,6 +21,11 @@ export const menus = [
         path: "/",
         target: "_blank",
     },
+    // {
+    //     name: "用户中心",
+    //     path: "/user/center",
+    //     access:AccessEnum.USER
+    // },
     {
         path: "/admin",
         name: "管理",
